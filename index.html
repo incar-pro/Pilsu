@@ -3085,6 +3085,17 @@ document.addEventListener('input', e => {
     clearTimeout(belly._msgT);
     belly._msgT = setTimeout(function(){ belly.classList.remove('show-msg'); }, 2600);
   };
+
+  // 마우스가 가까이 가면(잡으면) 자동으로 글씨 팝
+  var catchDist = 70;
+  window.addEventListener('mousemove', function(e){
+    var r = belly.getBoundingClientRect();
+    var cx = r.left + r.width/2, cy = r.top + r.height/2;
+    if(Math.hypot(cx-e.clientX, cy-e.clientY) < catchDist){
+      window.catchBelly();
+    }
+  });
+  // 모바일: 배꼽이 근처 탭해도 뜨게 (클릭 핸들러가 이미 있음)
 })();
 
 /* 다람쥐 드래그로 이동 (마우스 + 터치) */
